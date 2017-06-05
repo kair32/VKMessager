@@ -14,10 +14,10 @@ import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
 
-import utilis.Constants;
+import support.Constants;
 
-import static utilis.Constants.isResumed;
-import static utilis.Constants.mScore;
+import static support.Constants.isResumed;
+import static support.Constants.mScore;
 
 /**
  * Created by Kirill on 31.01.2017.

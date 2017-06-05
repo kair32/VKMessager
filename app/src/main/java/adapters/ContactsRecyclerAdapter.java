@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.example.kirill.vkmessager.R;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 import com.vk.sdk.api.VKApi;
 import com.vk.sdk.api.VKApiConst;
 import com.vk.sdk.api.VKParameters;
@@ -24,17 +23,13 @@ import com.vk.sdk.api.VKResponse;
 import com.vk.sdk.api.model.VKApiUserFull;
 import com.vk.sdk.api.model.VKUsersArray;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
-import activity.MainActivity;
 import activity.UserDialog;
 import support.DB.DbHelper;
-import utilis.CachingDataUsers;
-import utilis.Constants;
+import support.CachingDataUsers;
+import support.Constants;
 
 /**
  * Created by Kirill on 01.02.2017.

@@ -9,13 +9,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,13 +20,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kirill.vkmessager.R;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
@@ -42,23 +34,17 @@ import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 import com.vk.sdk.api.model.VKApiUser;
-import com.vk.sdk.api.model.VKApiUserFull;
 import com.vk.sdk.api.model.VKList;
-import com.vk.sdk.api.model.VKUsersArray;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import adapters.ContactsRecyclerAdapter;
 import fragments.Contacts_Fragment;
 import fragments.Dialogs_Fragment;
 import fragments.Setting_Fragment;
-import jp.wasabeef.blurry.Blurry;
 import support.MyService;
-import utilis.CachingDataUsers;
-import utilis.Constants;
-
-import static utilis.Constants.isResumed;
+import support.CachingDataUsers;
+import support.Constants;
 
 @TargetApi(Build.VERSION_CODES.M)
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import adapters.ContactsRecyclerAdapter;
 import adapters.DialogsResyclerAdapter;
-import utilis.CachingDataUsers;
+import support.CachingDataUsers;
 
 /**
  * Created by Kirill on 01.02.2017.

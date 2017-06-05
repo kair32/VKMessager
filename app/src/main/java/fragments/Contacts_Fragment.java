@@ -1,33 +1,27 @@
 package fragments;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
-import android.widget.TabWidget;
 
 import com.example.kirill.vkmessager.R;
 import com.vk.sdk.api.VKApi;
 import com.vk.sdk.api.VKApiConst;
-import com.vk.sdk.api.VKError;
 import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 import com.vk.sdk.api.model.VKApiUserFull;
 import com.vk.sdk.api.model.VKUsersArray;
 
-import activity.UserDialog;
 import adapters.ContactsRecyclerAdapter;
 import adapters.ContactsRecyclerAdapterOnline;
-import utilis.CachingDataUsers;
+import support.CachingDataUsers;
 
 /**
  * Created by Kirill on 31.01.2017.

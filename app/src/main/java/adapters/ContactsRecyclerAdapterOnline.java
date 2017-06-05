@@ -26,8 +26,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import activity.UserDialog;
-import utilis.CachingDataUsers;
-import utilis.Constants;
+import support.CachingDataUsers;
+import support.Constants;
 
 /**
  * Created by Kirill on 27.04.2017.

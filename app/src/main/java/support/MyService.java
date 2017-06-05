@@ -7,18 +7,10 @@ import android.app.Service;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.net.Uri;
 import android.os.IBinder;
-import android.provider.CalendarContract;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.widget.ImageView;
 
 import com.example.kirill.vkmessager.R;
 import com.squareup.picasso.Picasso;
@@ -31,19 +23,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import activity.MainActivity;
 import activity.UserDialog;
-import utilis.CachingDataUsers;
-import utilis.Constants;
 
 public class MyService extends Service {
     NotificationManager nm;

@@ -2,12 +2,6 @@ package adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.TimeZone;
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,15 +27,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import activity.UserDialog;
-import support.DB.DbDialogs;
 import support.ParseData;
-import utilis.CachingDataUsers;
-import utilis.Constants;
+import support.CachingDataUsers;
+import support.Constants;
 
 /**
  * Created by Kirill on 02.02.2017.

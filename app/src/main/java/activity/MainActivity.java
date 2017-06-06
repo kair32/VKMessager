@@ -76,9 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             );
         }
     }
-
-
-
+    
     private ImageView vAvatarImageView, vBackgroundImageView;
     private TextView vFullNameTextView;
     private SharedPreferences mSettings;
@@ -149,17 +147,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        vBackgroundImageView.setImageResource (R.mipmap.ic_launcher);
-        /*Blurry.with(MainActivity.this)
-                .radius(10)
-                .sampling(4)
-                .async()
-                .capture(vBackgroundImageView)
-                .into(vBackgroundImageView);*/
-    }
 
     @Override
     public void onBackPressed() {
@@ -234,30 +221,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override public void onBitmapFailed(Drawable errorDrawable) {}
                     @Override public void onPrepareLoad(Drawable placeHolderDrawable) {}
                 });
-       /* vBackgroundImageView.post(new Runnable() {
-            @Override
-            public void run() {
-                Blurry.with(MainActivity.this)
-                        .radius(10)
-                        .sampling(4)
-                        .async()
-                        .capture(vBackgroundImageView)
-                        .into(vBackgroundImageView);
-            }
-        });*/
     }
 
     class MyTimerTask extends TimerTask {
         @Override
         public void run() {
-            /*Blurry.with(MainActivity.this)
-                    .radius(10)
-                    .sampling(4)
-                    .async()
-                    .capture(vBackgroundImageView)
-                    .into(vBackgroundImageView);*/
-
-
             VKRequest currentRequest = VKApi.users().get( VKParameters.from(VKApiConst.FIELDS, "first_name, last_name, photo_100", VKApiConst.USER_ID, mSettings.getString("User_ID", "")));
             currentRequest.executeWithListener(new VKRequest.VKRequestListener() {
                 @Override

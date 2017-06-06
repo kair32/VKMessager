@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,11 +22,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kirill.vkmessager.R;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKApi;
@@ -42,6 +46,7 @@ import java.util.TimerTask;
 import fragments.Contacts_Fragment;
 import fragments.Dialogs_Fragment;
 import fragments.Setting_Fragment;
+import jp.wasabeef.blurry.Blurry;
 import support.MyService;
 import support.CachingDataUsers;
 import support.Constants;
@@ -210,9 +215,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .load(photo)
                 .error(R.drawable.ic_error_outline_black)
                 .into(vAvatarImageView);
-        /*Picasso.with(getBaseContext())
+        Picasso.with(getBaseContext())
                 .load(photo)
-                .into(vBackgroundImageView);*/
+                .into(vBackgroundImageView);
+        Picasso.with(getBaseContext())
+                .load(photo)
+                .into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        vBackgroundImageView.setImageBitmap(bitmap);
+                        Blurry.with(MainActivity.this)
+                                .radius(10)
+                                .sampling(4)
+                                .async()
+                                .capture(vBackgroundImageView)
+                                .into(vBackgroundImageView);
+                    }
+                    @Override public void onBitmapFailed(Drawable errorDrawable) {}
+                    @Override public void onPrepareLoad(Drawable placeHolderDrawable) {}
+                });
+       /* vBackgroundImageView.post(new Runnable() {
+            @Override
+            public void run() {
+                Blurry.with(MainActivity.this)
+                        .radius(10)
+                        .sampling(4)
+                        .async()
+                        .capture(vBackgroundImageView)
+                        .into(vBackgroundImageView);
+            }
+        });*/
     }
 
     class MyTimerTask extends TimerTask {

@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             );
         }
     }
-    
+
     private ImageView vAvatarImageView, vBackgroundImageView;
     private TextView vFullNameTextView;
     private SharedPreferences mSettings;
@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -197,30 +196,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void UserData(String name, String photo){
-        vFullNameTextView.setText(name);
-        Picasso.with(getBaseContext())
-                .load(photo)
-                .error(R.drawable.ic_error_outline_black)
-                .into(vAvatarImageView);
-        Picasso.with(getBaseContext())
-                .load(photo)
-                .into(vBackgroundImageView);
-        Picasso.with(getBaseContext())
-                .load(photo)
-                .into(new Target() {
-                    @Override
-                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                        vBackgroundImageView.setImageBitmap(bitmap);
-                        Blurry.with(MainActivity.this)
-                                .radius(10)
-                                .sampling(4)
-                                .async()
-                                .capture(vBackgroundImageView)
-                                .into(vBackgroundImageView);
-                    }
-                    @Override public void onBitmapFailed(Drawable errorDrawable) {}
-                    @Override public void onPrepareLoad(Drawable placeHolderDrawable) {}
-                });
+        if (photo!="") {
+            vFullNameTextView.setText(name);
+            Picasso.with(getBaseContext())
+                    .load(photo)
+                    .into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            vBackgroundImageView.setImageBitmap(bitmap);
+                            vAvatarImageView.setImageBitmap(bitmap);
+                            Blurry.with(MainActivity.this)
+                                    .radius(10)
+                                    .sampling(4)
+                                    .async()
+                                    .capture(vBackgroundImageView)
+                                    .into(vBackgroundImageView);
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        }
+                    });
+        }
     }
 
     class MyTimerTask extends TimerTask {
@@ -232,6 +233,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onComplete(VKResponse response) {
                     super.onComplete(response);
                     VKList<VKApiUser> user = (VKList)response.parsedModel;
+                    if(mSettings.getString("User_name", "")!="" && mSettings.getString("User_photo", "")!="")
                     if(!mSettings.getString("User_name", "").equals(user.get(0).first_name + " " + user.get(0).last_name)
                             || !mSettings.getString("User_photo", "").equals(user.get(0).photo_100)) {
                         if(user.size()!=0){

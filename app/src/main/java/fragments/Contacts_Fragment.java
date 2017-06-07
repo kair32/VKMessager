@@ -1,5 +1,6 @@
 package fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -65,24 +66,7 @@ public class Contacts_Fragment extends Fragment implements View.OnClickListener{
         mRecyclerView2.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView2.setLayoutManager(mLayoutManager);
-            final VKRequest request = VKApi.friends().get(VKParameters.from("order", "hints", VKApiConst.FIELDS, "id,onine,photo_100"));
-            request.executeWithListener(new VKRequest.VKRequestListener() {
-                @Override
-                public void onComplete(VKResponse response) {
-                    VKUsersArray usersArrayPars = (VKUsersArray) response.parsedModel;
-                    for (int i = 0; i < usersArrayPars.getCount(); i++){
-                        VKApiUserFull full = new VKApiUserFull();
-                        full.photo_100 = usersArrayPars.get(i).photo_100;
-                        full.last_name = usersArrayPars.get(i).last_name;
-                        full.first_name = usersArrayPars.get(i).first_name;
-                        full.id = usersArrayPars.get(i).id;
-                        full.online = usersArrayPars.get(i).online;
-                        if(usersArrayPars.get(i).online)
-                            usersArray2.add(full);
-                    }
-                    mAdapter2 = new ContactsRecyclerAdapterOnline(usersArray2, getContext());
-                    mRecyclerView2.setAdapter(mAdapter2);
-                }});
+        new Zapros().execute();
         mRecyclerView2.setAdapter(mAdapter2);
 
         TabHost tabHost = (TabHost) vRootView.findViewById(R.id.tabHost);
@@ -102,7 +86,32 @@ public class Contacts_Fragment extends Fragment implements View.OnClickListener{
 
         return vRootView;
     }
+    private class Zapros extends AsyncTask<Void,Void,Void>{
 
+        @Override
+        protected Void doInBackground(Void... params) {
+            final VKUsersArray usersArray2 = new VKUsersArray();
+            VKRequest request = VKApi.friends().get(VKParameters.from("order", "hints", VKApiConst.FIELDS, "id,onine,photo_100"));
+            request.executeWithListener(new VKRequest.VKRequestListener() {
+                @Override
+                public void onComplete(VKResponse response) {
+                    VKUsersArray usersArrayPars = (VKUsersArray) response.parsedModel;
+                    for (int i = 0; i < usersArrayPars.getCount(); i++){
+                        VKApiUserFull full = new VKApiUserFull();
+                        full.photo_100 = usersArrayPars.get(i).photo_100;
+                        full.last_name = usersArrayPars.get(i).last_name;
+                        full.first_name = usersArrayPars.get(i).first_name;
+                        full.id = usersArrayPars.get(i).id;
+                        full.online = usersArrayPars.get(i).online;
+                        if(usersArrayPars.get(i).online)
+                            usersArray2.add(full);
+                    }
+                    mAdapter2 = new ContactsRecyclerAdapterOnline(usersArray2, getContext());
+                    mRecyclerView2.setAdapter(mAdapter2);
+                }});
+            return null;
+        }
+    }
     @Override
     public void onClick(View v) {
         //int i= (int) v.getTag();
